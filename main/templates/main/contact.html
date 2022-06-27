@@ -1,0 +1,108 @@
+{% extends 'base.html' %}
+{% load widget_tweaks %}
+{% load static %}
+
+
+{% block content %}
+{% include 'headerContact.html' %}
+
+
+
+<div class="wrapper light-wrapper" dir='rtl'>
+  <div class="container inner">
+    <h2 class="homeTitleFont section-title" align='right'>كن على تواصل معنا</h2>
+    <p class="lead larger" align='right'>يمكنك ارسال اسئلتك واستفساراتك عن طرق الفورمة ادناة وسنحاول ان نجيبك باسرع وقت ممكن</p>
+    <div class="space40"></div>
+    <div class="row">
+      <div class="col-lg-7">
+        <form class="fields-white" method="POST">
+          {% csrf_token %}
+          <div class="messages"></div>
+          <div class="controls">
+            <div class="form-row">
+              <div class="col-lg-12 col-xl-6">
+                <div class="form-group">
+                  {% render_field form.fname class="form-control" required="required" data-error="الاسم الاول مطلوب" placeholder="* الاسم الاول" %}
+                  <div class="help-block with-errors"></div>
+                </div>
+              </div>
+              <div class="col-lg-12 col-xl-6">
+                <div class="form-group">
+                  {% render_field form.lname class="form-control" required="required" data-error="الاسم الاخير مطلوب" placeholder="* الاسم الاخير" %}
+                  <div class="help-block with-errors"></div>
+                </div>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="col-lg-12 col-xl-6">
+                <div class="form-group">
+                  {% render_field form.email class="form-control" required="required" data-error="البريد الالكتروني مطلوب" placeholder="* بريدك الالكتروني" %}
+                  <div class="help-block with-errors"></div>
+                </div>
+              </div>
+              <div class="col-lg-12 col-xl-6">
+                <div class="form-group">
+                  {% render_field form.phoneNo class="form-control"  placeholder="077 او 078 او 075 رقم هاتفك(اختياري)" %}
+                  <div class="help-block with-errors"></div>
+                </div>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="col-md-12">
+                <div class="form-group">
+                  {% render_field form.message class="form-control" required="required" data-error="الرسالة مطلوبة" placeholder="* الرسالة " %}
+                  <div class="help-block with-errors"></div>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <input type="submit" class="btn btn-send" value="ارسال الرسالة">
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="col-md-4">
+                <p class="text-muted"><strong>*</strong> هذه الحقول مطلوبة</p>
+              </div>
+            </div>
+          </div>
+        </form>
+        <!-- /form -->
+      </div>
+      <!--/column -->
+      <div class="space30 d-none d-md-block d-lg-none"></div>
+      <div class="col-lg-4 offset-lg-1" align='right'>
+        <div class="d-flex flex-row">
+          <div>
+            <div class="icon color-default fs-34 mr-15"> <i class="icofont-location-pin"></i> </div>
+          </div>
+          <div>
+            <h6 class="mb-5">العنوان</h6>
+            <address>بغداد <br class="d-none d-md-block" />العراق</address>
+          </div>
+        </div>
+        <div class="d-flex flex-row">
+          <div>
+            <div class="icon color-default fs-34 mr-15"> <i class="icofont-telephone"></i> </div>
+          </div>
+          <div>
+            <h6 class="mb-5">هاتف</h6>
+            <p>00 (123) 456 78 90 <br class="d-none d-md-block" />00 (987) 654 32 10</p>
+          </div>
+        </div>
+        <div class="d-flex flex-row">
+          <div>
+            <div class="icon color-default fs-34 mr-15"> <i class="icofont-mail-box"></i> </div>
+          </div>
+          <div>
+            <h6 class="mb-5">البريد الالكتروني</h6>
+            <p><a href="mailto:info@codeforiraq.org" class="nocolor">info@codeforiraq.org</a></p>
+          </div>
+        </div>
+      </div>
+      <!--/column -->
+    </div>
+    <!--/.row -->
+  </div>
+  <!-- /.container -->
+</div>
+
+{% endblock content %}

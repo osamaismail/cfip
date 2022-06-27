@@ -1,0 +1,84 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+
+{% block content %}
+{% include 'headerEvents.html' %}
+
+
+<div class="wrapper light-wrapper">
+  <div class="container inner">
+    <div class="blog grid grid-view boxed">
+      <div class="row isotope">
+
+        {% for event in events %}
+        <div class="item post grid-sizer col-md-6 col-lg-4" dir='rtl'>
+          <div class="box bg-white shadow p-30">
+            <figure class="main mb-30 overlay overlay1 rounded"><a href="{{ event.get_event_url }}"> <img src="{{ event.eventPIC.url }}" alt="" height='200px' /></a>
+              <figcaption>
+                <h5 class="TagFont from-top mb-0">اقرأ المزيد</h5>
+              </figcaption>
+            </figure>
+            <center>
+              {% if event.status %}
+              <div class="TagFont category"><a href="#" class="badge badge-pill badge-primary">Opened</a></div>
+              {% else %}
+              <div class="TagFont category"><a href="#" class="badge badge-pill badge-danger">Closed</a></div>
+              {% endif %}
+            </center>
+            <h2 class="homeTitleFont post-title" align='center'><a href="{{event.get_event_url}}">{{ event.title }}</a></h2>
+            <!-- /.post-content -->
+            <div class="meta mb-0"><span class="date"><i class="jam jam-clock"></i>{{ event.created | date }}</span></div>
+          </div>
+          <!-- /.box -->
+        </div>
+        <!-- /.post -->
+        {% empty %}
+          <center>
+            <p><h1 class='paraBlockFont'>نعتذر، لا توجد اي احداث مسجله الان</h1></p>
+          </center>
+        {% endfor %}
+      </div>
+      <!-- /.row -->
+    </div>
+    <!-- /.blog -->
+    <div class="space30 d-block d-md-none"></div>
+    <div class="pagination">
+      <ul>
+        {% if events.has_previous %}
+          <li><a href="?page={{ events.previous_page_number }}" class="pl-0"><i class="jam jam-arrow-left"></i></a></li>
+          {% if events.number > 3 %}
+            <li class="active"><a href="?page=1"><span>1</span></a></li>
+            {% if events.number > 4 %}
+              <li><span>...</span></li>
+            {% endif %}
+          {% endif %}
+        {% endif %}
+
+        {% for num in events.paginator.page_range %}
+          {% if events.number == num %}
+            <li><a href="?page={{num}}"><span>{{num}}</span></a></li>
+          {% elif num > events.number|add:'-3' and num < events.number|add:'3' %}
+            <li><a href="?page={{num}}"><span>{{num}}</span></a></li>
+          {% endif %}
+        {% endfor %}
+
+        {% if events.has_next %}
+          {% if events.number < events.pagenator.num_pages|add:'-3' %}
+            <span>...</span>
+            <li><span><a href="?page={{ events.paginator.num_pages }}">{{ events.paginator.num_pages }}</a></span></li>
+          {% elif events.number < events.paginator.num_pages|add:'-2' %}
+            <li><span><a href="?page={{ events.paginator.num_pages }}">{{ events.paginator.num_pages }}</a></span></li>
+          {% endif %}
+          <li><a href="?page={{ events.next_page_number }}" class="pr-0"><i class="jam jam-arrow-right"></i></a></li>
+        {% endif %}
+      </ul>
+    </div>
+    <!-- /.pagination -->
+  </div>
+  <!-- /.container -->
+</div>
+<!-- /.wrapper -->
+
+{% endblock content %}

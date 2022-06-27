@@ -1,0 +1,22 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="ar">
+
+{% include 'head.html' %}
+
+
+<body>
+  
+  <div class="content-wrapper">
+    {% block content %}
+
+    {% endblock content %}
+  
+    
+    <!--Footer-->
+    {% include 'footer.html' %}
+    {% include "js.html" %}
+  </div>
+</body>
+</html>

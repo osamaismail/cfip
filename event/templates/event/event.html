@@ -1,0 +1,151 @@
+{% extends 'base.html' %}
+{% load widget_tweaks %}
+{% load static %}
+
+
+
+{% block content %}
+{% include 'headerEvents.html' %}
+
+
+
+<div class="wrapper light-wrapper">
+  <div class="container inner pt-80">
+    <div class="row">
+      <div class="col-lg-10 offset-lg-1">
+        <div class="blog classic-view boxed">
+          <div class="post mb-0">
+            <div class="box bg-white shadow">
+
+              <figure class="main rounded"><img src="{{ detail.eventPIC.url }}" alt="" /></figure>
+              <div class="space40"></div>
+              <div class="post-content" dir='rtl' align='right'>
+                <div class="category text-center">
+                  {% if detail.status %}
+                  <a href="#" class="badge badge-pill badge-primary">Opened</a>
+                  {% else %}
+                  <a href="#" class="badge badge-pill badge-danger">Closed</a>
+                  {% endif %}
+                </div>
+                <h2 class="post-title text-center eventTitleFont">{{ detail.title }}</h2>
+                <div class="meta text-center" dir='ltr'><span class="date"><i class="jam jam-clock"></i>{{ detail.updated }}</span><span class="author"><i class="jam jam-user"></i><a href="#">{{detail.user.get_full_name}}</a></span></div>
+                <div class='space20'>
+                </div>
+                
+                <div class='eventContentFont'>
+                  <p>{{detail.content|safe}}</p>
+                </div>
+                {% if not detail.facebook == None or not detail.twitter == None %}
+                <div class="d-lg-flex justify-content-between align-items-center meta-footer">
+                  <div class="space20 d-lg-none"></div>
+                    <div class="d-flex align-items-center">
+                      <p class="pr-20 mb-0"><strong>Share on:</strong></p>
+                      <ul class="social social-mute">
+                        {% if not detail.facebook == None %}
+                        <li><a href="{{detail.facebook}}" target="_blank"><i class="jam jam-facebook"></i></a></li>
+                        {% endif %}
+                        {% if not detail.twitter == None %}
+                        <li><a href="{{detail.twitter}}" target="_blank"><i class="jam jam-twitter"></i></a></li>
+                        {% endif %}
+                      </ul>
+                      <!-- /.social -->
+                    </div>
+                </div>
+                {% endif %}
+              </div>
+              <!-- /.post-content -->
+
+            </div>
+            <!-- /.box -->
+          </div>
+          <!-- /.box -->
+          <div class="space10"></div>
+          <div class="box bg-white shadow">
+            <div class="d-flex flex-column justify-content-between align-items-center meta-footer" dir='ltr'>
+              <div class="space20"></div>
+                <div class="d-flex flex-column align-items-center">
+                  <ul class="list-unstyled lineal-icon-list">
+                    <li class="row-lg-4">
+                      <img src="{% static 'style/images/icons/calendar.png' %}" alt="" /><br>{{ detail.eventDate| date:"l d/ m/ Y" }}
+                    </li>
+                    <li class="row-lg-4">
+                      <img src="{% static 'style/images/icons/clock.png' %}" alt="" /><br>{{ detail.eventTime }}
+                    </li>
+                  </ul>
+                  <!-- /.social -->
+                </div>
+            </div>
+              {% if Timecheck %}
+                <!-- /#comments -->
+                <div class="space80"></div>
+                <div class='eventContentFont' align='center'>
+                  <h3>سجل لحضور الحدث</h3>
+                  <p>يمكنك ان تحجز مقعدك منذ الان في هذا الحدث الكبير</p>
+                </div>
+                <div class="space20"></div>
+
+                <form class="comment-form" method="POST">
+                  {% csrf_token %}
+                  <div class="form-group" align='right' dir='rtl'>
+                    {% render_field FormAttend.full_name class="form-control" placeholder="الاسم الكامل" %}
+                  </div>
+                  <div align='right' dir='rtl'>
+                    <h6>يرجى اختيار جنسك</h6>
+                    </div>
+                    <div class="form-group custom-select-wrapper" align='right' dir='rtl'>
+                      {% render_field FormAttend.gender class="custom-select" %}
+                    </div>
+                  <div class="form-group" align='right' dir='rtl'>
+                    {% render_field FormAttend.email class="form-control" placeholder="بريدك الالكتروني" %}
+                  </div>
+                  <div class="form-group" align='right' dir='rtl'>
+                    {% render_field FormAttend.phoneNo class="form-control" placeholder="رقم الهاتف: 077 او 078 او 075" %}
+                  </div>
+                  <div align='right' dir='rtl'>
+                  <h6>يرجى اختيار تخصصك</h6>
+                  </div>
+                  <div class="form-group custom-select-wrapper" align='right' dir='rtl'>
+                    {% render_field FormAttend.specialty class="custom-select" %}
+                  </div>
+                  <div align='right' dir='rtl'>
+                    <h6>يرجى اختيار مستوى التعليم</h6>
+                    </div>
+                    <div class="form-group custom-select-wrapper" align='right' dir='rtl'>
+                      {% render_field FormAttend.education class="custom-select" %}
+                    </div>
+                  <div align='right' dir='rtl'>
+                  <h6>يرجى اختيار عمرك</h6>
+                  </div>
+                  <div class="form-group custom-select-wrapper" align='right' dir='rtl'>
+                    {% render_field FormAttend.age class="custom-select" %}
+                  </div>
+                  <div align='right' dir='rtl'>
+                  <h6>يرجى اختيار محافظتك</h6>
+                  </div>
+                  <div class="form-group custom-select-wrapper" align='right' dir='rtl'>
+                    {% render_field FormAttend.governorates class="custom-select" %}
+                  </div>
+                  <div class="form-group" align='right' dir='rtl'>
+                    {% render_field cform.captcha class="form-control" placeholder='اعد كتابة الحروف الظاهرة في الصورة'%}
+                  </div>
+                  <div  align='center' dir='rtl'>
+                  <input type="submit" value="تسجيل الحضور" class="btn">
+                  </div>
+                </form>
+                <!-- /.comment-form -->
+              {% endif %}
+          </div>
+        </div>
+        <!-- /.blog -->
+      </div>
+      <!-- /column -->
+    </div>
+    <!-- /.row -->
+  </div>
+  <!-- /.container -->
+</div>
+
+{% endblock content %}
+
+
+

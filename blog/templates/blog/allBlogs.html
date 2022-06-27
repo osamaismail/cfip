@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+
+{% block content %}
+{% include 'headerBlog.html' %}
+<div class="wrapper light-wrapper">
+  <div class="container inner">
+    <div class="blog grid grid-view boxed">
+      <div class="row isotope">
+
+        {% for blog in blogsAll %}
+        <div class="item post grid-sizer col-md-6 col-lg-4" dir='rtl'>
+          <div class="box bg-white shadow p-30">
+            <figure class="main mb-30 overlay overlay1 rounded"><a href="{{ blog.get_blog_url }}"> <img src="{{ blog.mainPIC.url }}" alt="" height='200px' /></a>
+              <figcaption>
+                <h5 class="TagFont from-top mb-0">اقرأ المزيد</h5>
+              </figcaption>
+            </figure>
+            {% comment %} <center>
+            <div class="TagFont category"><a href="#" class="badge badge-{{ blog.category.get_badge_display }}">{{blog.category.get_name_display}}</a></div>
+            </center> {% endcomment %}
+            <h2 class="homeTitleFont post-title" align='center'><a href="{{ blog.get_blog_url }}">{{ blog.title }}</a></h2>
+            <!-- /.post-content -->
+            <div class="meta mb-0"><span class="date"><i class="jam jam-clock"></i>{{ blog.created }}</span></div>
+          </div>
+          <!-- /.box -->
+        </div>
+        <!-- /.post -->
+        
+        {% endfor %}
+      </div>
+      <!-- /.row -->
+    </div>
+    <!-- /.blog -->
+    <div class="space30 d-block d-md-none"></div>
+    <div class="pagination">
+      <ul>
+        {% if blogsAll.has_previous %}
+          <li><a href="?page={{ blogsAll.previous_page_number }}" class="pl-0"><i class="jam jam-arrow-left"></i></a></li>
+          {% if blogsAll.number > 3 %}
+            <li class="active"><a href="?page=1"><span>1</span></a></li>
+            {% if blogsAll.number > 4 %}
+              <li><span>...</span></li>
+            {% endif %}
+          {% endif %}
+        {% endif %}
+
+        {% for num in blogsAll.paginator.page_range %}
+          {% if blogsAll.number == num %}
+            <li><ablogsAll href="?page={{num}}"><span>{{num}}</span></ablogsAll></li>
+          {% elif num > blogsAll.number|add:'-3' and num < blogsAll.number|add:'3' %}
+            <li><a href="?page={{num}}"><span>{{num}}</span></a></li>
+          {% endif %}
+        {% endfor %}
+
+        {% if blogsAll.has_next %}
+          {% if blogsAll.number < newsAll.pagenator.num_pages|add:'-3' %}
+            <span>...</span>
+            <li><span><a href="?page={{ newsAll.paginator.num_pages }}">{{ blogsAll.paginator.num_pages }}</a></span></li>
+          {% elif blogsAll.number < newsAll.paginator.num_pages|add:'-2' %}
+            <li><span><a href="?page={{ newsAll.paginator.num_pages }}">{{ blogsAll.paginator.num_pages }}</a></span></li>
+          {% endif %}
+          <li><a href="?page={{ blogsAll.next_page_number }}" class="pr-0"><i class="jam jam-arrow-right"></i></a></li>
+        {% endif %}
+      </ul>
+    </div>
+    <!-- /.pagination -->
+  </div>
+  <!-- /.container -->
+</div>
+<!-- /.wrapper -->
+
+{% endblock content %}
+
+

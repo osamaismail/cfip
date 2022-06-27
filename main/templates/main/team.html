@@ -1,0 +1,101 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block content %}
+{% include 'headerTeam.html' %}
+
+
+
+<div class="wrapper gray-wrapper">
+  <div class="container inner">
+    <div class='homeTitleFont section-title mb-40 text-center'>
+    <h1>فريقنا</h1>
+    </div>
+    <div class="grid-view boxed">
+      <div class="row text-center" dir='rtl'>
+        {% for member in AllTeam %}
+        <div class="col-md-6 col-lg-3">
+          <div class="box bg-white shadow">
+            <div>
+              <img src="{{ member.pic.url}}" style="width: 8rem" alt="" />
+            </div>
+            <h5 class="mb-15">{{ member.full_name }}</h5>
+            <div class="meta mb-10">{{ member.position }}</div>
+            <p class="mb-10">{{ member.about|truncatewords:7 }}</p>
+            <ul class="social social-s ml-auto mb-10">
+              {% if not member.facebook == None %}
+              <li><a href="{{ member.facebook }}" target="_blank"><i class="jam jam-facebook"></i></a></li>
+              {% endif %}
+              {% if not member.twitter == None %}
+              <li><a href="{{ member.twitter }}" target="_blank"><i class="jam jam-twitter"></i></a></li>
+              {% endif %}
+              {% if not member.linkden == None %}
+              <li><a href="{{ member.linkden }}" target="_blank"><i class="jam jam-linkedin"></i></a></li>
+              {% endif %}
+            </ul>
+          </div>
+          <!--/.box -->
+        </div>
+        <!--/column -->
+        {% endfor %}
+        {% comment %}
+        <div class="col-md-6 col-lg-3">
+          <div class="box bg-white shadow">
+            <div class="img-blob blob1 mb-20"><img src="style/images/art/te2.jpg" style="width: 7rem" alt="" /></div>
+            <h5 class="mb-15">Coriss Ambady</h5>
+            <div class="meta mb-10">Marketing Specialist</div>
+            <p class="mb-10">Pellentesque ornare sem lacinia quam venenatis.</p>
+            <ul class="social social-s ml-auto mb-10">
+              <li><a href="#"><i class="jam jam-twitter"></i></a></li>
+              <li><a href="#"><i class="jam jam-facebook"></i></a></li>
+              <li><a href="#"><i class="jam jam-instagram"></i></a></li>
+            </ul>
+          </div>
+          <!--/.box -->
+        </div>
+        <!--/column -->
+        <div class="space30 d-none d-md-block d-lg-none"></div>
+        <div class="col-md-6 col-lg-3">
+          <div class="box bg-white shadow">
+            <div class="img-blob blob1 mb-20"><img src="style/images/art/te3.jpg" style="width: 7rem" alt="" /></div>
+            <h5 class="mb-15">Barclay Widerski</h5>
+            <div class="meta mb-10">Sales Manager</div>
+            <p class="mb-10">Pellentesque ornare sem lacinia quam venenatis.</p>
+            <ul class="social social-s ml-auto mb-10">
+              <li><a href="#"><i class="jam jam-twitter"></i></a></li>
+              <li><a href="#"><i class="jam jam-facebook"></i></a></li>
+              <li><a href="#"><i class="jam jam-instagram"></i></a></li>
+            </ul>
+          </div>
+          <!--/.box -->
+        </div>
+        <!--/column -->
+        <div class="col-md-6 col-lg-3">
+          <div class="box bg-white shadow">
+            <div class="img-blob blob1 mb-20"><img src="style/images/art/te4.jpg" style="width: 7rem" alt="" /></div>
+            <h5 class="mb-15">Nicolas Brooten</h5>
+            <div class="meta mb-10">Investment Planner</div>
+            <p class="mb-10">Pellentesque ornare sem lacinia quam venenatis.</p>
+            <ul class="social social-s ml-auto mb-10">
+              <li><a href="#"><i class="jam jam-twitter"></i></a></li>
+              <li><a href="#"><i class="jam jam-facebook"></i></a></li>
+              <li><a href="#"><i class="jam jam-instagram"></i></a></li>
+            </ul>
+          </div>
+          <!--/.box -->
+        </div>
+        <!--/column -->
+        {% endcomment %}
+      </div>
+      <!--/.row -->
+    </div>
+    <!--/.grid-view -->
+  </div>
+  <!-- /.container -->
+</div>
+
+{% endblock  %}
+
+
+    

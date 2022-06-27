@@ -1,0 +1,147 @@
+{% extends 'base.html' %}
+{% load widget_tweaks %}
+{% load static %}
+
+
+{% block content %}
+{% include 'navbar.html' %}
+
+
+
+<div class="wrapper light-wrapper">
+  <div class="container inner">
+    {% if searched %}
+      <h2 class="homeTitleFont section-title" align='center'>You are searching for {{searched}}</h2>
+      {% if qsb %}
+          <div class="wrapper light-wrapper">
+            <div class="container inner">
+              <h2 class="section-title mb-40 text-center">Blog Search Results</h2>
+              {% for b in qsb %}
+              <div class="row">
+                <div class="col-md-10" align='right' dir='rtl'>
+                  <ul class="unordered-list bullet-blue">
+                    <li><a href="{{b.get_blog_url}}">{{b.title}}</a></li>
+                  </ul>
+                </div>
+                <!-- /column -->
+              </div>
+              {% endfor %}
+              <!-- /.row -->
+            </div>
+            <!-- /.container -->
+          </div>
+          <!-- /.wrapper -->
+      {% else %}
+        <div class="wrapper light-wrapper">
+          <div class="container inner">
+            <h2 class="section-title mb-40 text-center">Blog Search Results</h2>
+            <div class="row">
+              <div class="col-md-2">
+                <ul class="unordered-list bullet-blue">
+                  <li>No results found for {{searched}}</li>
+                </ul>
+              </div>
+              <!-- /column -->
+            </div>
+            <!-- /.row -->
+          </div>
+          <!-- /.container -->
+        </div>
+        <!-- /.wrapper -->
+      {% endif %}
+
+      {% if qse %}
+          <div class="wrapper gray-wrapper">
+            <div class="container inner">
+              <h2 class="section-title mb-40 text-center">Events Search Results</h2>
+              {% for e in qse %}
+              <div class="row">
+                <div class="col-md-10" align='right' dir='rtl'>
+                  <ul class="unordered-list bullet-green">
+                    <li><a href="{{e.get_event_url}}">{{e.title}}</a></li>
+                  </ul>
+                </div>
+                <!-- /column -->
+              </div>
+              {% endfor %}
+              <!-- /.row -->
+            </div>
+            <!-- /.container -->
+          </div>
+          <!-- /.wrapper -->
+      {% else %}
+      <div class="wrapper gray-wrapper">
+        <div class="container inner">
+          <h2 class="section-title mb-40 text-center">Event Search Results</h2>
+          <div class="row">
+            <div class="col-md-2">
+              <ul class="unordered-list bullet-green">
+                <li>No results found for {{searched}}</li>
+              </ul>
+            </div>
+            <!-- /column -->
+          </div>
+          <!-- /.row -->
+        </div>
+        <!-- /.container -->
+      </div>
+      <!-- /.wrapper -->
+      {% endif %}
+
+      {% if qsn %}
+          <div class="wrapper light-wrapper">
+            <div class="container inner">
+              <h2 class="section-title mb-40 text-center">News Search Results</h2>
+              {% for n in qsn %}
+              <div class="row">
+                <div class="col-md-10" align='right' dir='rtl'>
+                  <ul class="unordered-list bullet-red">
+                    <li><a href="{{n.get_news_url}}">{{n.title}}</a></li>
+                  </ul>
+                </div>
+                <!-- /column -->
+              </div>
+              {% endfor %}
+              <!-- /.row -->
+            </div>
+            <!-- /.container -->
+          </div>
+          <!-- /.wrapper -->
+      {% else %}
+      <div class="wrapper light-wrapper">
+        <div class="container inner">
+          <h2 class="section-title mb-40 text-center">News Search Results</h2>
+          <div class="row">
+            <div class="col-md-2">
+              <ul class="unordered-list bullet-red">
+                <li>No results found for {{searched}}</li>
+              </ul>
+            </div>
+            <!-- /column -->
+          </div>
+          <!-- /.row -->
+        </div>
+        <!-- /.container -->
+      </div>
+      <!-- /.wrapper -->
+      {% endif %}
+
+    {% else %}
+      <h2 class="homeTitleFont section-title" align='center'>You forgot to search for something...</h2>
+    {% endif %}
+
+    <div class="space40"></div>
+    <div class="row">
+      <div class="col-lg-7">
+
+      </div>
+      <!--/column -->
+      <div class="space30 d-none d-md-block d-lg-none"></div>
+
+    </div>
+    <!--/.row -->
+  </div>
+  <!-- /.container -->
+</div>
+
+{% endblock content %}

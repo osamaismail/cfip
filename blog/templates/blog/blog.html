@@ -1,0 +1,55 @@
+
+{% extends 'base.html' %}
+
+{% load static %}
+
+
+
+{% block content %}
+{% include 'headerBlog.html' %}
+
+    <div class="wrapper light-wrapper">
+      <div class="container inner pt-80">
+        <div class="row">
+          <div class="col-lg-10 offset-lg-1">
+            <div class="blog classic-view">
+              <div class="post mb-0">
+                <figure class="rounded"><img src="{{ blogInfo.mainPIC.url }}" alt="" /></figure>
+                <div class="space40"></div>
+                <div class="post-content" dir='rtl' align='right'>
+                  {% comment %} <div class="category text-center"><a href="#" class="badge badge-pill badge-{{ blogInfo.category.get_badge_display }}">{{ blogInfo.category }}</a></div> {% endcomment %}
+                  <h2 class="post-title text-center eventTitleFont">{{ blogInfo.title }}</h2>
+                  <div class="meta text-center" dir='ltr'><span class="date"><i class="jam jam-clock"></i>{{ blogInfo.created|date }}</span><span class="author"><i class="jam jam-user"></i><a href="#">{{blogInfo.user.get_full_name}}</a></span></div>
+                <div class='eventContentFont'>
+                  <p>
+                      {{ blogInfo.content|safe }}
+                  </p>
+                </div>
+                  <div class="space30"></div>
+                  <div dir='rtl' align='right'>
+                    {% if not blogInfo.source == None %}
+                    <p><a href='{{ blogInfo.source }}' class="mr-1 badge badge-info" target="_blank"><h3>المصدر</h3></a></p>
+                    {% endif %}
+                  </div>
+                  <div class="clearfix"></div>
+                  <div class="space40"></div>
+
+                  <div class="space10"></div>
+                </div>
+                <!-- /.post-content -->
+              </div>
+              <!-- /.post -->
+            </div>
+            <!-- /.blog -->
+          </div>
+          <!-- /column -->
+        </div>
+        <!-- /.row -->
+      </div>
+      <!-- /.container -->
+    </div>
+    <!-- /.wrapper -->
+
+
+{% endblock content %}
+
